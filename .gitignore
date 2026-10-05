@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+
+# Build output
+bin/
+server/dist/*
+!server/dist/.gitkeep
+
+# Local databases
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Test artifacts
+web/test-results/
+web/playwright-report/

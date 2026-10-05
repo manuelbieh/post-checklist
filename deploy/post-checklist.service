@@ -1,0 +1,40 @@
+# Post Check server. deploy/deploy.sh installs this as
+# /etc/systemd/system/post-checklist.service.
+[Unit]
+Description=Post Check: which venue visits are posted on Instagram and TikTok
+After=network-online.target docker.service
+Wants=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=post-checklist
+Group=post-checklist
+ExecStart=/opt/post-checklist/post-checklist
+Restart=always
+RestartSec=5
+
+# Like curb.service: bound to the Docker bridge gateway, where the Caddy
+# container (ship-caddy) reaches it and the internet doesn't (ufw is inactive).
+Environment=ADDR=172.18.0.1:8787
+Environment=DB_PATH=/var/lib/post-checklist/post-checklist.db
+# Requests arrive through Caddy, which puts the client address in X-Forwarded-For.
+Environment=TRUST_PROXY=true
+StateDirectory=post-checklist
+StateDirectoryMode=0750
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictNamespaces=true
+LockPersonality=true
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

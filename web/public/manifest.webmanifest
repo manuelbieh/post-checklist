@@ -1,0 +1,16 @@
+{
+  "id": "/",
+  "name": "Post Check",
+  "short_name": "Post Check",
+  "description": "Track which restaurant and bar visits are posted on Instagram and TikTok.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1f5239",
+  "theme_color": "#1f5139",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

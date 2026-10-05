@@ -1,0 +1,12 @@
+# Site block for /opt/ship/Caddyfile on manuelbieh.online (added once, by hand;
+# see README, Deploy). Browsers send the name in its punycode form:
+# checklist.tüdelü.com is checklist.xn--tdel-0rad.com.
+#
+# Unlike the manuelbieh.online blocks, no DNS challenge: the Cloudflare record is
+# "DNS only", so Caddy gets the certificate with the default HTTP/TLS challenges.
+# No access log: request paths contain list IDs, which work as passwords.
+checklist.xn--tdel-0rad.com {
+	encode zstd gzip
+	header Strict-Transport-Security "max-age=31536000"
+	reverse_proxy 172.18.0.1:8787
+}
